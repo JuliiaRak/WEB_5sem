@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>База фільмів</title>
+    <link rel="stylesheet" href="css/site.css" />
+</head>
+<body>
+    <h1>База фільмів</h1>
+    <h3>Додати продюсера</h3>
+    <form action="javascript:void(0);" method="POST" onsubmit="addDirector()">
+        <input type="text" id="add-name" placeholder="Ім'я нового продюсера">
+        <input type="text" id="add-country" placeholder="Країна нового продюсера">
+        <input type="submit" value="Додати">
+    </form>
+
+    <div id="editDirector">
+        <h3>Змінити інформацію про продюсера</h3>
+        <form action="javascript:void(0);" onsubmit="updateDirector()">
+            <input type="hidden" id="edit-id">
+            <input type="text" id="edit-name">
+            <input type="text" id="edit-country">
+            <input type="submit" value="Зберегти зміни">
+            <a onclick="closeInput()" aria-label="Close">&#10006;</a>
+        </form>
+    </div>
+
+    <p id="counter"></p>
+
+    <table>
+        <tr>
+            <th>Ім'я продюсера</th>
+            <th>Країна продюсера</th>
+        </tr>
+        <tbody id="directors"></tbody>
+    </table>
+
+    <script src="js/Lab2.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        getDirectors();
+    </script>
+</body>
+</html>

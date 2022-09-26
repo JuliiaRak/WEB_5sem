@@ -1,0 +1,90 @@
+﻿@model OlineShopWebApplication.Product
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+
+<h1>Інформація про продукт</h1>
+
+<div>
+    <h4>Продукт</h4>
+    <hr />
+    <style>
+    .rightimg{
+        float: right;
+        margin:1px 100px 100px 5px;
+        margin-top:0px;
+    }
+</style>
+<p><img src="@Model.ProductWeight" alt="Фото продукту" width="25%" class="rightimg"></p>
+
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Year)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Year)
+        </dd>
+
+        <!--<dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NumberLeft)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NumberLeft)
+        </dd>-->
+        <!--<dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ProductWeight)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ProductWeight)
+        </dd>-->
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Category.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Firm)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Firm.Name)
+        </dd>
+
+    </dl>
+
+    <iframe width="560" height="315" src="@Model.NumberLeft" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+</div>
+
+
+
+
+<div>
+    if (User.IsInRole("admin"))
+    {
+    <p>
+        <a asp-action="Edit" asp-route-id="@Model?.ProductId">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </p>
+    }
+    else{
+    <p>
+        <a asp-action="Index">Back to List</a>
+    </p>
+    }
+</div>
