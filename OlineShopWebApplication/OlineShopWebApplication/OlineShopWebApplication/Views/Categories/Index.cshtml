@@ -1,0 +1,88 @@
+﻿@model IEnumerable<OlineShopWebApplication.Category>
+
+@{
+    ViewData["Title"] = "Категорії";
+}
+
+<h1>Категорії</h1>
+
+@{
+    if (User.IsInRole("admin"))
+    {
+     <p>
+         <a asp-action="Create">Додати нову категорію</a>
+     </p>
+    }
+}
+
+
+
+<!--<h10>Завантаження інформації з файлу</h10>
+@using (Html.BeginForm("Import", "Categories", FormMethod.Post, new { enctype = "multipart/form-data", id = "frm-excel" }))
+{
+    <div>
+        <input type="file" name="fileExcel" id="fileExcel" /> <input type="submit" value="Завантажити" />
+    </div>
+}
+
+    <h10>Вивантаження інформації у файл</h10>
+    <form method="post" asp-controller="Categories" asp-action="Export"> <input type="submit" value="Вивантажити" /> 
+    </form>-->
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @{
+                    if (User.IsInRole("admin"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.CategoriesId">Edit |</a>                
+                        <a asp-action="Delete" asp-route-id="@item.CategoriesId">Delete |</a> 
+                    }
+                 }
+                        <a asp-action="Details" asp-route-id="@item.CategoriesId">ProductsDetails</a> 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+<div class="container">
+    <div id="chart1"></div>
+</div>
+@section scripts{
+    <script type "text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script>
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+            $.get('/api/Chart/JsonData', function(JsonData) {
+                data = google.visualization.arrayToDataTable(JsonData, false);
+                var option = {
+                    title: "Співвідношення кількості продуктів та категорій",
+                    width: 500,
+                    height: 400
+  };
+                chart = new google.visualization.PieChart(document.getElementById('chart1'));
+                chart.draw(data, option);
+            })
+        }
+    </script>
+}
