@@ -24,6 +24,6 @@ namespace FilmsWebApp.Models
 
 
         public virtual ICollection<GenresOfFilm>? GenresOfFilm { get; set; }
-        public virtual Production? Album { get; set; }
+        public virtual Production? Production { get; set; }
     }
 }

@@ -24,10 +24,7 @@ namespace FilmsWebApp.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Production>>> GetProductions()
         {
-            if (_context.Productions == null)
-            {
-                return NotFound();
-            }
+            
             return await _context.Productions.ToListAsync();
         }
 
@@ -35,10 +32,7 @@ namespace FilmsWebApp.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Production>> GetProduction(int id)
         {
-            if (_context.Productions == null)
-            {
-                return NotFound();
-            }
+            
             var production = await _context.Productions.FindAsync(id);
 
             if (production == null)
@@ -85,10 +79,7 @@ namespace FilmsWebApp.Controllers
         [HttpPost]
         public async Task<ActionResult<Production>> PostProduction(Production production)
         {
-            if (_context.Productions == null)
-            {
-                return Problem("Entity set 'MovieContext.Productions'  is null.");
-            }
+            
             _context.Productions.Add(production);
             await _context.SaveChangesAsync();
 
@@ -99,10 +90,7 @@ namespace FilmsWebApp.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProductions(int id)
         {
-            if (_context.Productions == null)
-            {
-                return NotFound();
-            }
+            
             var production = await _context.Productions.FindAsync(id);
             if (production == null)
             {
@@ -117,7 +105,9 @@ namespace FilmsWebApp.Controllers
 
         private bool ProductionExists(int id)
         {
-            return (_context.Productions?.Any(e => e.Id == id)).GetValueOrDefault();
+            //return (_context.Productions?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Productions.Any(e => e.Id == id));
+
         }
     }
 }

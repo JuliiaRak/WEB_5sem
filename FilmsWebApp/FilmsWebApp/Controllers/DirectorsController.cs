@@ -24,10 +24,10 @@ namespace FilmsWebApp.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Director>>> GetDirectors()
         {
-            if (_context.Directors == null)
+            /*if (_context.Directors == null)
             {
                 return NotFound();
-            }
+            }*/
             return await _context.Directors.ToListAsync();
         }
 
@@ -35,10 +35,10 @@ namespace FilmsWebApp.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Director>> GetDirector(int id)
         {
-            if (_context.Directors == null)
+            /*if (_context.Directors == null)
             {
                 return NotFound();
-            }
+            }*/
             var director = await _context.Directors.FindAsync(id);
 
             if (director == null)
@@ -85,10 +85,10 @@ namespace FilmsWebApp.Controllers
         [HttpPost]
         public async Task<ActionResult<Director>> PostDirector(Director director)
         {
-            if (_context.Directors == null)
+            /*if (_context.Directors == null)
             {
                 return Problem("Entity set 'MovieContext.Directors'  is null.");
-            }
+            }*/
             _context.Directors.Add(director);
             await _context.SaveChangesAsync();
 
@@ -99,10 +99,10 @@ namespace FilmsWebApp.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDirector(int id)
         {
-            if (_context.Directors == null)
+            /*if (_context.Directors == null)
             {
                 return NotFound();
-            }
+            }*/
             var director = await _context.Directors.FindAsync(id);
             if (director == null)
             {
@@ -117,7 +117,8 @@ namespace FilmsWebApp.Controllers
 
         private bool DirectorExists(int id)
         {
-            return (_context.Directors?.Any(e => e.Id == id)).GetValueOrDefault();
+            //return (_context.Directors?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Directors.Any(e => e.Id == id));
         }
     }
 }

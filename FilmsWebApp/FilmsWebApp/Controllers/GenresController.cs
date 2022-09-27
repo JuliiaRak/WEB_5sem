@@ -24,10 +24,7 @@ namespace FilmsWebApp.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Genre>>> GetGenres()
         {
-            if (_context.Genres == null)
-            {
-                return NotFound();
-            }
+            
             return await _context.Genres.ToListAsync();
         }
 
@@ -35,10 +32,7 @@ namespace FilmsWebApp.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Genre>> GetGenre(int id)
         {
-            if (_context.Genres == null)
-            {
-                return NotFound();
-            }
+            
             var genre = await _context.Genres.FindAsync(id);
 
             if (genre == null)
@@ -85,10 +79,7 @@ namespace FilmsWebApp.Controllers
         [HttpPost]
         public async Task<ActionResult<Genre>> PostGenre(Genre genre)
         {
-            if (_context.Genres == null)
-            {
-                return Problem("Entity set 'MovieContext.Genres'  is null.");
-            }
+            
             _context.Genres.Add(genre);
             await _context.SaveChangesAsync();
 
@@ -99,10 +90,7 @@ namespace FilmsWebApp.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGenre(int id)
         {
-            if (_context.Genres == null)
-            {
-                return NotFound();
-            }
+            
             var genre = await _context.Genres.FindAsync(id);
             if (genre == null)
             {
@@ -117,7 +105,9 @@ namespace FilmsWebApp.Controllers
 
         private bool GenreExists(int id)
         {
-            return (_context.Genres?.Any(e => e.Id == id)).GetValueOrDefault();
+            //return (_context.Genres?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Genres.Any(e => e.Id == id));
+
         }
     }
 }
