@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Try to win!</title>
+
+    <style>
+        .block {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            top: 0;
+            background: rgba(108, 65, 65, 0.7);
+            padding: 5px;
+            display: none;
+        }
+
+        .btn {
+            position: absolute;
+
+            width: 100px;
+            height: 50px;
+            font-size: 15px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            box-shadow: rgb(0, 0, 0, 0.35) 0 5px 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <h1>
+            Спробуй виграти :)
+        </h1>
+        <div>
+            <button id="btn2" class="btn">Програти</button>
+            <button id="btn" class="btn">Виграти</button>
+        </div>
+    </center>
+
+    <script>
+        const random = (min, max) => {
+            const rand = min + Math.random() * (max - min + 1);
+            return Math.floor(rand);
+        }
+
+        const btn = document.querySelector('#btn');
+        const btn2 = document.querySelector('#btn2');
+
+        btn.addEventListener('mouseenter', () => {
+            btn.style.left = `${random(0, 90)}%`;
+            btn.style.top = `${random(0, 90)}%`;
+        });
+
+
+        btn.addEventListener('click', () => {
+            alert('Ура, ти виграв :D');
+        });
+        btn2.addEventListener('click', () => {
+            alert('Нехай щастить :)');
+        });
+    </script>
+</body>
+
+</html>
